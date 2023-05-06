@@ -7,7 +7,7 @@ const morgan = require("morgan")
 const methodOverride = require("method-override")
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
  
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
@@ -55,24 +55,20 @@ const listSchema = mongoose.Schema({
 const List = mongoose.model("List", listSchema);
 
 app.get("/", async (req, res) => {
-    const find = await Item.find({})
-    .then((allItems) => {
-
-        if(allItems.length === 0){
-            Item.insertMany(itemArray)
-            .then(() => console.log("Default 3 values inserted in DB"))
-            .catch((err) => console.log(err));
-            res.redirect("/");
-        }
-        else{
-            res.render("list", {listTitle: "Today", newElement: allItems});    
-        }
-
-    })
-    .catch((err) => console.log(err));
-        
-
-})
+    try {
+      const allItems = await Item.find({});
+      if (allItems.length === 0) {
+        await Item.insertMany(itemArray);
+        console.log("Default 3 values inserted in DB");
+        res.redirect("/");
+      } else {
+        res.render("list", { listTitle: "Today", newElement: allItems });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  });
+  
 
 app.post("/", async function(req, res) {
     try {
