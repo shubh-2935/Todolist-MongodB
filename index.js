@@ -3,6 +3,8 @@ const express = require('express');
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const _ = require("lodash");
+const morgan = require("morgan") 
+const methodOverride = require("method-override")
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -10,6 +12,9 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
+
+app.use(morgan("tiny"));
+app.use(methodOverride("_method"));
 
 mongoose.set("strictQuery", false);
 const connectDB = async()=> {
