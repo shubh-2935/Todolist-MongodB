@@ -10,6 +10,20 @@ h1 {
   padding: 10px;
 }
 
+.info{
+  position: absolute;
+  max-width: 400px;
+  margin-left: 20px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+  width: 70%;
+}
+
+.info p{
+  font-size: 20px;
+}
+
 .box {
   max-width: 400px;
   margin: 50px auto;

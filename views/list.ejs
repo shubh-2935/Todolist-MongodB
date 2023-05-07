@@ -1,10 +1,15 @@
 
 <%- include("header") -%>
+<div class="info">
+    <p>You can create multiple Todo Lists by simply adding your list name above. Add https://shubh-todolist.cyclic.app<span style="font-weight: bold;">/yourListName</span></p>
+</div>
     <div class="box" id="heading">
+        
         <h1><%= listTitle %></h1>
     </div>
    
     <div class="box">
+        
         <% newElement.forEach((value)=>{ %>
             <form action="/delete" method="post">    
                 <div class="item">
